@@ -6,6 +6,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+
 import java.awt.GridBagLayout;
 import javax.swing.JList;
 import java.awt.GridBagConstraints;
@@ -15,6 +17,8 @@ import javax.swing.JLabel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
+import java.util.Hashtable;
 import java.awt.event.ActionEvent;
 
 public class Main extends JFrame {
@@ -29,7 +33,8 @@ public class Main extends JFrame {
 	private JLabel lblTransicion;
 	private JComboBox comboBox_2;
 	private JButton btnNewButton;
-
+	private DefaultListModel modelo;
+	private Hashtable <String, Transicion> table = new Hashtable<String,Transicion>();
 	/**
 	 * Launch the application.
 	 */
@@ -83,6 +88,7 @@ public class Main extends JFrame {
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 0;
 		gbc_comboBox.gridy = 1;
+		
 		contentPane.add(comboBox, gbc_comboBox);
 		
 		lblNewLabel = new JLabel("Estado hasta:");
@@ -134,15 +140,40 @@ public class Main extends JFrame {
 		gbc_btnNewButton.gridx = 2;
 		gbc_btnNewButton.gridy = 6;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
+		añadirestados(5);
 	}
 
 	private class BtnNewButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			DefaultListModel modelo = new DefaultListModel();
-			modelo.addElement("Elemento1");
-			modelo.addElement("Elemento2");
-			modelo.addElement("Elemento3");
-			list.setModel(modelo);
+			String desde=comboBox.getSelectedItem().toString();
+			String hasta=comboBox_1.getSelectedItem().toString();
+			String transicion=comboBox_2.getSelectedItem().toString();
+			Transicion t=new Transicion(desde,hasta,transicion);
+			table.put(desde+hasta+transicion, t);
+			rellenartabla();
+		}
+	}
+	
+	private void añadirestados(int n){//segun el nº de estados que nos digan que quiere así se crearan
+		String q="q";
+		for(int i=0;i<n;i++){
+			 comboBox.addItem(q+i);
+			 comboBox_1.addItem(q+i);
+		}
+		comboBox_2.addItem(0);
+		comboBox_2.addItem(1);
+		
+	}
+	public void rellenartabla(){
+		modelo = new DefaultListModel();	
+		Enumeration e = table.keys();
+		while( e.hasMoreElements() ){
+			String clave = (String) e.nextElement();	
+			Transicion aux=table.get(clave);
+			modelo.addElement(aux.toString());
+			
+			list.setModel(modelo);			
+			
 		}
 	}
 }
