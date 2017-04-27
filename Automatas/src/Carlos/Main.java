@@ -140,7 +140,7 @@ public class Main extends JFrame {
 		gbc_btnNewButton.gridx = 2;
 		gbc_btnNewButton.gridy = 6;
 		contentPane.add(btnNewButton, gbc_btnNewButton);
-		añadirestados(5);
+		aÃ±adirestados(5);
 	}
 
 	private class BtnNewButtonActionListener implements ActionListener {
@@ -156,7 +156,7 @@ public class Main extends JFrame {
 		}
 	}
 	
-	private void añadirestados(int n){//segun el nº de estados que nos digan que quiere así se crearan
+	private void aÃ±adirestados(int n){//segun el nï¿½ de estados que nos digan que quiere asï¿½ se crearan
 		String q="q";
 		for(int i=0;i<n;i++){
 			 comboBox.addItem(q+i);
