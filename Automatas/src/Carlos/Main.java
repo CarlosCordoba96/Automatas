@@ -146,9 +146,11 @@ public class Main extends JFrame {
 	private class BtnNewButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			String desde=comboBox.getSelectedItem().toString();
+			Estado desd=new Estado(desde,false,false);
 			String hasta=comboBox_1.getSelectedItem().toString();
+			Estado hast=new Estado(hasta,false,false);
 			String transicion=comboBox_2.getSelectedItem().toString();
-			Transicion t=new Transicion(desde,hasta,transicion);
+			Transicion t=new Transicion(desd,hast,transicion);
 			table.put(desde+hasta+transicion, t);
 			rellenartabla();
 		}
