@@ -13,7 +13,7 @@ public class Estado {
 
 	
 	public String toString() {
-		return "Estado [estado=" + estado + ", inicial=" + inicial + ", end=" + end + "]";
+		return estado + ", inicial=" + inicial + ", end=" + end + "]";
 	}
 
 }

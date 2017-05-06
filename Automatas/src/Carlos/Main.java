@@ -44,6 +44,7 @@ public class Main extends JFrame {
 	private DefaultListModel modelo;
 	private Hashtable <String, Transicion> table = new Hashtable<String,Transicion>();
 	private JButton btnEnsearImagen;
+	private JButton btnAadirEstado;
 	/**
 	 * Launch the application.
 	 */
@@ -99,6 +100,18 @@ public class Main extends JFrame {
 		gbc_comboBox.gridy = 1;
 
 		contentPane.add(comboBox, gbc_comboBox);
+		
+		btnAadirEstado = new JButton("Añadir estado");
+		btnAadirEstado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		GridBagConstraints gbc_btnAadirEstado = new GridBagConstraints();
+		gbc_btnAadirEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAadirEstado.gridx = 3;
+		gbc_btnAadirEstado.gridy = 1;
+		contentPane.add(btnAadirEstado, gbc_btnAadirEstado);
 
 		lblNewLabel = new JLabel("Estado hasta:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();

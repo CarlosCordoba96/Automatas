@@ -8,10 +8,11 @@ public class Transicion {
 		this.desde=desde;
 		this.hasta=hasta;
 		this.transicion=transicion;
+		
 	}
 	@Override
 	public String toString() {
-		return desde.toString() + "->" + hasta.toString() + "(" + transicion + ")";
+		return desde+ "->" + hasta + "(" + transicion + ")";
 	}
 
 }
