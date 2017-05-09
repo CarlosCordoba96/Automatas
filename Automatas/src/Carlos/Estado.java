@@ -12,8 +12,38 @@ public class Estado {
 	}
 
 	
+	public String getEstado() {
+		return estado;
+	}
+
+
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+
+	public boolean isInicial() {
+		return inicial;
+	}
+
+
+	public void setInicial(boolean inicial) {
+		this.inicial = inicial;
+	}
+
+
+	public boolean isEnd() {
+		return end;
+	}
+
+
+	public void setEnd(boolean end) {
+		this.end = end;
+	}
+
+
 	public String toString() {
-		return "Estado [estado=" + estado + ", inicial=" + inicial + ", end=" + end + "]";
+		return "n "+estado+" "+inicial+" "+end;
 	}
 
 }

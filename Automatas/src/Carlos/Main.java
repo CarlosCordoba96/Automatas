@@ -35,6 +35,7 @@ public class Main extends JFrame {
 	private JButton btnNewButton;
 	private DefaultListModel modelo;
 	private Hashtable <String, Transicion> table = new Hashtable<String,Transicion>();
+	private Hashtable <String, Estado> estado = new Hashtable<String,Estado>();
 	/**
 	 * Launch the application.
 	 */

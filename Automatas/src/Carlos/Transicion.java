@@ -11,7 +11,7 @@ public class Transicion {
 	}
 	@Override
 	public String toString() {
-		return desde.toString() + "->" + hasta.toString() + "(" + transicion + ")";
+		return desde.toString();
 	}
 
 }
