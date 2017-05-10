@@ -28,6 +28,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.swing.JSeparator;
+import javax.swing.border.LineBorder;
+import java.awt.Color;
+import javax.swing.JCheckBox;
+import java.awt.Font;
 
 public class Main extends JFrame {
 
@@ -47,6 +52,7 @@ public class Main extends JFrame {
 	private Hashtable <String, Estado> estado = new Hashtable<String,Estado>();
 	private JButton btnEnsearImagen;
 	private JButton btnAadirEstado;
+	private JPanel panel;
 	/**
 	 * Launch the application.
 	 */
@@ -68,15 +74,15 @@ public class Main extends JFrame {
 	 */
 	public Main() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 758, 301);
+		setBounds(100, 100, 847, 499);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{83, 78, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 26, 0, 0, 0, 15, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[]{83, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 26, 0, 0, 0, 0, 15, 61, 54, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
 		lblEstadoDesde = new JLabel("Estado desde:");
@@ -85,13 +91,13 @@ public class Main extends JFrame {
 		gbc_lblEstadoDesde.gridx = 0;
 		gbc_lblEstadoDesde.gridy = 0;
 		contentPane.add(lblEstadoDesde, gbc_lblEstadoDesde);
-
-		lblListaDeTransiciones = new JLabel("Lista de transiciones");
-		GridBagConstraints gbc_lblListaDeTransiciones = new GridBagConstraints();
-		gbc_lblListaDeTransiciones.insets = new Insets(0, 0, 5, 5);
-		gbc_lblListaDeTransiciones.gridx = 5;
-		gbc_lblListaDeTransiciones.gridy = 0;
-		contentPane.add(lblListaDeTransiciones, gbc_lblListaDeTransiciones);
+		
+				lblListaDeTransiciones = new JLabel("Lista de transiciones");
+				GridBagConstraints gbc_lblListaDeTransiciones = new GridBagConstraints();
+				gbc_lblListaDeTransiciones.insets = new Insets(0, 0, 5, 5);
+				gbc_lblListaDeTransiciones.gridx = 8;
+				gbc_lblListaDeTransiciones.gridy = 0;
+				contentPane.add(lblListaDeTransiciones, gbc_lblListaDeTransiciones);
 
 		comboBox = new JComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
@@ -102,18 +108,6 @@ public class Main extends JFrame {
 		gbc_comboBox.gridy = 1;
 
 		contentPane.add(comboBox, gbc_comboBox);
-		
-		btnAadirEstado = new JButton("Añadir estado");
-		btnAadirEstado.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-		});
-		GridBagConstraints gbc_btnAadirEstado = new GridBagConstraints();
-		gbc_btnAadirEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_btnAadirEstado.gridx = 3;
-		gbc_btnAadirEstado.gridy = 1;
-		contentPane.add(btnAadirEstado, gbc_btnAadirEstado);
 
 		lblNewLabel = new JLabel("Estado hasta:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -124,10 +118,11 @@ public class Main extends JFrame {
 
 		list = new JList();
 		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.gridheight = 7;
-		gbc_list.insets = new Insets(0, 0, 5, 5);
+		gbc_list.gridwidth = 3;
+		gbc_list.gridheight = 9;
+		gbc_list.insets = new Insets(0, 0, 5, 0);
 		gbc_list.fill = GridBagConstraints.BOTH;
-		gbc_list.gridx = 5;
+		gbc_list.gridx = 7;
 		gbc_list.gridy = 1;
 		contentPane.add(list, gbc_list);
 
@@ -146,57 +141,103 @@ public class Main extends JFrame {
 		gbc_lblTransicion.gridx = 0;
 		gbc_lblTransicion.gridy = 4;
 		contentPane.add(lblTransicion, gbc_lblTransicion);
+				
+						comboBox_2 = new JComboBox();
+						GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
+						gbc_comboBox_2.gridwidth = 2;
+						gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
+						gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
+						gbc_comboBox_2.gridx = 0;
+						gbc_comboBox_2.gridy = 5;
+						contentPane.add(comboBox_2, gbc_comboBox_2);
+		
+				btnNewButton = new JButton("Insertar ");
+				btnNewButton.addActionListener(new BtnNewButtonActionListener());
+				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+				gbc_btnNewButton.gridwidth = 2;
+				gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+				gbc_btnNewButton.gridx = 4;
+				gbc_btnNewButton.gridy = 5;
+				contentPane.add(btnNewButton, gbc_btnNewButton);
+		
+		panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setLayout(null);
+		GridBagConstraints gbc_panel = new GridBagConstraints();
+		gbc_panel.insets = new Insets(0, 0, 0, 5);
+		gbc_panel.gridwidth = 5;
+		gbc_panel.gridheight = 6;
+		gbc_panel.fill = GridBagConstraints.BOTH;
+		gbc_panel.gridx = 0;
+		gbc_panel.gridy = 7;
+		contentPane.add(panel, gbc_panel);
+		
+		btnAadirEstado = new JButton("Añadir estado");
+		btnAadirEstado.setBounds(207, 112, 157, 52);
+		panel.add(btnAadirEstado);
+		
+		JCheckBox chckbxEstadoInicial = new JCheckBox("Estado Inicial");
+		chckbxEstadoInicial.setBounds(37, 60, 139, 29);
+		panel.add(chckbxEstadoInicial);
+		
+		JCheckBox chckbxEstadoFinal = new JCheckBox("Estado Final");
+		chckbxEstadoFinal.setBounds(37, 97, 139, 29);
+		panel.add(chckbxEstadoFinal);
+		
+		JLabel lblAadirUnNuevo = new JLabel("Añadir un nuevo estado");
+		lblAadirUnNuevo.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblAadirUnNuevo.setBounds(15, 16, 423, 32);
+		panel.add(lblAadirUnNuevo);
+								
+										btnEnsearImagen = new JButton("Mostrar imagen");
+										btnEnsearImagen.addActionListener(new ActionListener() {
+											public void actionPerformed(ActionEvent arg0) {
+											}
+										});
+										btnEnsearImagen.addMouseListener(new MouseAdapter() {
+											@Override
+											public void mouseClicked(MouseEvent e) {
 
-		comboBox_2 = new JComboBox();
-		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-		gbc_comboBox_2.gridwidth = 2;
-		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-		gbc_comboBox_2.gridx = 0;
-		gbc_comboBox_2.gridy = 5;
-		contentPane.add(comboBox_2, gbc_comboBox_2);
+												File file = new File("pics/alhambra.png"); 
 
-		btnNewButton = new JButton("Insertar ");
-		btnNewButton.addActionListener(new BtnNewButtonActionListener());
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.gridwidth = 2;
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-		gbc_btnNewButton.gridx = 2;
-		gbc_btnNewButton.gridy = 6;
-		contentPane.add(btnNewButton, gbc_btnNewButton);
+												FileInputStream img = null;
+												BufferedImage image=null;
+												try {
+													img = new FileInputStream(file);
+												} catch (FileNotFoundException e2) {
+													// TODO Auto-generated catch block
+													e2.printStackTrace();
+												}
 
-		btnEnsearImagen = new JButton("Enseñar imagen");
-		btnEnsearImagen.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
+												try {
+													image = ImageIO.read(img);
+												} catch (IOException e1) {
+													// TODO Auto-generated catch block
+													e1.printStackTrace();
+												}
+												Imagen im=new Imagen(image);
+												im.printimg();
 
-				File file = new File("pics/alhambra.png"); 
-
-				FileInputStream img = null;
-				BufferedImage image=null;
-				try {
-					img = new FileInputStream(file);
-				} catch (FileNotFoundException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}
-
-				try {
-					image = ImageIO.read(img);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				Imagen im=new Imagen(image);
-				im.printimg();
-
+											}
+										});
+										GridBagConstraints gbc_btnEnsearImagen = new GridBagConstraints();
+										gbc_btnEnsearImagen.insets = new Insets(0, 0, 5, 5);
+										gbc_btnEnsearImagen.gridx = 8;
+										gbc_btnEnsearImagen.gridy = 11;
+										contentPane.add(btnEnsearImagen, gbc_btnEnsearImagen);
+		btnAadirEstado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				boolean inicial, fin;
+				String name = "q";
+				
+				inicial = chckbxEstadoInicial.isSelected();
+				fin = chckbxEstadoFinal.isSelected();
+				
+				Estado nuevo=new Estado(name,inicial,fin);
+				comboBox.addItem(nuevo);
+				comboBox_1.addItem(nuevo);
 			}
 		});
-		GridBagConstraints gbc_btnEnsearImagen = new GridBagConstraints();
-		gbc_btnEnsearImagen.insets = new Insets(0, 0, 0, 5);
-		gbc_btnEnsearImagen.gridx = 5;
-		gbc_btnEnsearImagen.gridy = 8;
-		contentPane.add(btnEnsearImagen, gbc_btnEnsearImagen);
 		añadirestados(5);
 	}
 
@@ -213,7 +254,7 @@ public class Main extends JFrame {
 		}
 	}
 
-	private void añadirestados(int n){//segun el n� de estados que nos digan que quiere as� se crearan
+	private void añadirestados(int n){//segun el nº de estados que nos digan que quiere as� se crearan
 		String q="q";
 		for(int i=0;i<n;i++){
 			comboBox.addItem(q+i);
