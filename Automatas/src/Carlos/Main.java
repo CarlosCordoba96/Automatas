@@ -55,6 +55,8 @@ public class Main extends JFrame {
 	private JButton btnAadirEstado;
 	private JPanel panel;
 	private LinkedList <String> vocabulario;
+	private JList list_1;
+	private DefaultListModel modelo2;
 	/**
 	 * Launch the application.
 	 */
@@ -72,9 +74,9 @@ public class Main extends JFrame {
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{83, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 26, 0, 0, 0, 0, 15, 61, 54, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 26, 0, 0, 0, 0, 15, 61, 25, 0, 0, 0, 0};
 		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
 		lblEstadoDesde = new JLabel("Estado desde:");
@@ -158,7 +160,7 @@ public class Main extends JFrame {
 		GridBagConstraints gbc_panel = new GridBagConstraints();
 		gbc_panel.insets = new Insets(0, 0, 0, 5);
 		gbc_panel.gridwidth = 5;
-		gbc_panel.gridheight = 6;
+		gbc_panel.gridheight = 7;
 		gbc_panel.fill = GridBagConstraints.BOTH;
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 7;
@@ -180,43 +182,59 @@ public class Main extends JFrame {
 		lblAadirUnNuevo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblAadirUnNuevo.setBounds(15, 16, 423, 32);
 		panel.add(lblAadirUnNuevo);
-								
-										btnEnsearImagen = new JButton("Mostrar imagen");
-										btnEnsearImagen.addActionListener(new ActionListener() {
-											public void actionPerformed(ActionEvent arg0) {
-											}
-										});
-										btnEnsearImagen.addMouseListener(new MouseAdapter() {
-											@Override
-											public void mouseClicked(MouseEvent e) {
+										
+												btnEnsearImagen = new JButton("Mostrar imagen");
+												btnEnsearImagen.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent arg0) {
+													}
+												});
+												btnEnsearImagen.addMouseListener(new MouseAdapter() {
+													@Override
+													public void mouseClicked(MouseEvent e) {
 
-												File file = new File("pics/alhambra.png"); 
+														File file = new File("pics/alhambra.png"); 
 
-												FileInputStream img = null;
-												BufferedImage image=null;
-												try {
-													img = new FileInputStream(file);
-												} catch (FileNotFoundException e2) {
-													// TODO Auto-generated catch block
-													e2.printStackTrace();
-												}
+														FileInputStream img = null;
+														BufferedImage image=null;
+														try {
+															img = new FileInputStream(file);
+														} catch (FileNotFoundException e2) {
+															// TODO Auto-generated catch block
+															e2.printStackTrace();
+														}
 
-												try {
-													image = ImageIO.read(img);
-												} catch (IOException e1) {
-													// TODO Auto-generated catch block
-													e1.printStackTrace();
-												}
-												Imagen im=new Imagen(image);
-												im.printimg();
+														try {
+															image = ImageIO.read(img);
+														} catch (IOException e1) {
+															// TODO Auto-generated catch block
+															e1.printStackTrace();
+														}
+														Imagen im=new Imagen(image);
+														im.printimg();
 
-											}
-										});
-										GridBagConstraints gbc_btnEnsearImagen = new GridBagConstraints();
-										gbc_btnEnsearImagen.insets = new Insets(0, 0, 5, 5);
-										gbc_btnEnsearImagen.gridx = 8;
-										gbc_btnEnsearImagen.gridy = 11;
-										contentPane.add(btnEnsearImagen, gbc_btnEnsearImagen);
+													}
+												});
+												
+												JLabel lblListaDeEstados = new JLabel("Lista de estados:");
+												GridBagConstraints gbc_lblListaDeEstados = new GridBagConstraints();
+												gbc_lblListaDeEstados.insets = new Insets(0, 0, 5, 5);
+												gbc_lblListaDeEstados.gridx = 8;
+												gbc_lblListaDeEstados.gridy = 10;
+												contentPane.add(lblListaDeEstados, gbc_lblListaDeEstados);
+												
+												list_1 = new JList();
+												GridBagConstraints gbc_list_1 = new GridBagConstraints();
+												gbc_list_1.gridheight = 2;
+												gbc_list_1.insets = new Insets(0, 0, 5, 5);
+												gbc_list_1.fill = GridBagConstraints.BOTH;
+												gbc_list_1.gridx = 8;
+												gbc_list_1.gridy = 11;
+												contentPane.add(list_1, gbc_list_1);
+												GridBagConstraints gbc_btnEnsearImagen = new GridBagConstraints();
+												gbc_btnEnsearImagen.insets = new Insets(0, 0, 0, 5);
+												gbc_btnEnsearImagen.gridx = 8;
+												gbc_btnEnsearImagen.gridy = 13;
+												contentPane.add(btnEnsearImagen, gbc_btnEnsearImagen);
 										
 		btnAadirEstado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -276,6 +294,18 @@ public class Main extends JFrame {
 
 		}
 	}
+	public void rellenartabla2(){
+		modelo = new DefaultListModel();	
+		Enumeration e = estado.keys();
+		while( e.hasMoreElements() ){
+			String clave = (String) e.nextElement();	
+			Estado aux=estado.get(clave);
+			modelo.addElement(aux.toString());
+			list_1.setModel(modelo);			
+
+		}
+	}
+	
 	public void rellenartablaEstados(){
 		comboBox.removeAllItems();
 		 comboBox_1.removeAllItems();
@@ -285,7 +315,9 @@ public class Main extends JFrame {
 		   Estado aux=estado.get(clave);
 		   comboBox.addItem(aux.getEstado());
 		   comboBox_1.addItem(aux.getEstado());
+		  
 		  }
+		  rellenartabla2();
 		 }
 	public void rellenarVocabulario(){
 		for(int i=0;i<vocabulario.size();i++){
