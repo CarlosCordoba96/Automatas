@@ -41,7 +41,7 @@ public class Vocabulary extends JFrame {
 	 * Create the frame.
 	 */
 	public Vocabulary() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 592, 390);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -90,7 +90,8 @@ public class Vocabulary extends JFrame {
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Main m=new Main(vocabulario);
+				m.setVisible(true);
 			}
 		});
 		btnSiguiente.setFont(new Font("Tahoma", Font.PLAIN, 20));

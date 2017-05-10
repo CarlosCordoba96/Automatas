@@ -20,6 +20,7 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.Enumeration;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -49,30 +50,21 @@ public class Main extends JFrame {
 	private DefaultListModel modelo;
 	private Hashtable <String, Transicion> table = new Hashtable<String,Transicion>();
 
-	private Hashtable <String, Estado> estado = new Hashtable<String,Estado>();
+	private  Hashtable <String, Estado> estado = new Hashtable<String,Estado>();
 	private JButton btnEnsearImagen;
 	private JButton btnAadirEstado;
 	private JPanel panel;
+	private LinkedList <String> vocabulario;
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main frame = new Main();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
+	 * @param vocabulario2 
 	 */
-	public Main() {
+	public Main(LinkedList<String> vocabulario2) {
+		vocabulario=vocabulario2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 847, 499);
 		contentPane = new JPanel();
@@ -159,7 +151,7 @@ public class Main extends JFrame {
 				gbc_btnNewButton.gridx = 4;
 				gbc_btnNewButton.gridy = 5;
 				contentPane.add(btnNewButton, gbc_btnNewButton);
-		
+				rellenarVocabulario();
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setLayout(null);
@@ -225,6 +217,7 @@ public class Main extends JFrame {
 										gbc_btnEnsearImagen.gridx = 8;
 										gbc_btnEnsearImagen.gridy = 11;
 										contentPane.add(btnEnsearImagen, gbc_btnEnsearImagen);
+										
 		btnAadirEstado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean inicial, fin;
@@ -233,14 +226,22 @@ public class Main extends JFrame {
 				inicial = chckbxEstadoInicial.isSelected();
 				fin = chckbxEstadoFinal.isSelected();
 				
-				Estado nuevo=new Estado(name,inicial,fin);
-				comboBox.addItem(nuevo);
-				comboBox_1.addItem(nuevo);
+				Estado nuevo=new Estado(name+ultimoestado(),inicial,fin);
+				estado.put(name+ultimoestado(), nuevo);
+				
+				rellenartablaEstados();
+				rellenarVocabulario();
 			}
 		});
-		añadirestados(5);
-	}
 
+	}
+	
+	
+	
+	
+	
+	
+	
 	private class BtnNewButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			String desde=comboBox.getSelectedItem().toString();
@@ -253,16 +254,16 @@ public class Main extends JFrame {
 			rellenartabla();
 		}
 	}
+	public int ultimoestado(){	
+		int count=0;
+		Enumeration e = estado.keys();
+		while( e.hasMoreElements() ){
+			String clave = (String) e.nextElement();	
+			Estado aux=estado.get(clave);
+				count++;	
 
-	private void añadirestados(int n){//segun el nº de estados que nos digan que quiere as� se crearan
-		String q="q";
-		for(int i=0;i<n;i++){
-			comboBox.addItem(q+i);
-			comboBox_1.addItem(q+i);
 		}
-		comboBox_2.addItem(0);
-		comboBox_2.addItem(1);
-
+		return count;
 	}
 	public void rellenartabla(){
 		modelo = new DefaultListModel();	
@@ -271,9 +272,24 @@ public class Main extends JFrame {
 			String clave = (String) e.nextElement();	
 			Transicion aux=table.get(clave);
 			modelo.addElement(aux.toString());
-
 			list.setModel(modelo);			
 
+		}
+	}
+	public void rellenartablaEstados(){
+		comboBox.removeAllItems();
+		 comboBox_1.removeAllItems();
+		  Enumeration e = estado.keys();
+		  while( e.hasMoreElements() ){
+		   String clave = (String) e.nextElement(); 
+		   Estado aux=estado.get(clave);
+		   comboBox.addItem(aux.getEstado());
+		   comboBox_1.addItem(aux.getEstado());
+		  }
+		 }
+	public void rellenarVocabulario(){
+		for(int i=0;i<vocabulario.size();i++){
+			comboBox_2.addItem(vocabulario.get(i));
 		}
 	}
 }
