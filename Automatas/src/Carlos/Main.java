@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 
@@ -57,6 +58,7 @@ public class Main extends JFrame {
 	private LinkedList <String> vocabulario;
 	private JList list_1;
 	private DefaultListModel modelo2;
+	private JScrollPane scrollPane;
 	/**
 	 * Launch the application.
 	 */
@@ -68,7 +70,7 @@ public class Main extends JFrame {
 	public Main(LinkedList<String> vocabulario2) {
 		vocabulario=vocabulario2;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 847, 499);
+		setBounds(100, 100, 887, 544);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -167,7 +169,7 @@ public class Main extends JFrame {
 		contentPane.add(panel, gbc_panel);
 		
 		btnAadirEstado = new JButton("Añadir estado");
-		btnAadirEstado.setBounds(207, 112, 157, 52);
+		btnAadirEstado.setBounds(85, 208, 157, 52);
 		panel.add(btnAadirEstado);
 		
 		JCheckBox chckbxEstadoInicial = new JCheckBox("Estado Inicial");
@@ -222,14 +224,18 @@ public class Main extends JFrame {
 												gbc_lblListaDeEstados.gridy = 10;
 												contentPane.add(lblListaDeEstados, gbc_lblListaDeEstados);
 												
+												scrollPane = new JScrollPane();
+												GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+												gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+												gbc_scrollPane.fill = GridBagConstraints.BOTH;
+												gbc_scrollPane.gridx = 8;
+												gbc_scrollPane.gridy = 11;
+												contentPane.add(scrollPane, gbc_scrollPane);
+												
+									
+												
 												list_1 = new JList();
-												GridBagConstraints gbc_list_1 = new GridBagConstraints();
-												gbc_list_1.gridheight = 2;
-												gbc_list_1.insets = new Insets(0, 0, 5, 5);
-												gbc_list_1.fill = GridBagConstraints.BOTH;
-												gbc_list_1.gridx = 8;
-												gbc_list_1.gridy = 11;
-												contentPane.add(list_1, gbc_list_1);
+												scrollPane.setViewportView(list_1);
 												GridBagConstraints gbc_btnEnsearImagen = new GridBagConstraints();
 												gbc_btnEnsearImagen.insets = new Insets(0, 0, 0, 5);
 												gbc_btnEnsearImagen.gridx = 8;
