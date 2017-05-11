@@ -16,5 +16,13 @@ public class Transicion {
 		return "t "+desde.getEstado()+ "->" + hasta.getEstado() + "(" + transicion + ")";
 
 	}
+	
+	public Estado getDesde() {
+		return desde;
+	}
+	
+	public Estado getHasta() {
+		return hasta;
+	}
 
 }

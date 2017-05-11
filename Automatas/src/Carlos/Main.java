@@ -188,13 +188,26 @@ public class Main extends JFrame {
 												btnEnsearImagen = new JButton("Mostrar imagen");
 												btnEnsearImagen.addActionListener(new ActionListener() {
 													public void actionPerformed(ActionEvent arg0) {
+
 													}
 												});
 												btnEnsearImagen.addMouseListener(new MouseAdapter() {
 													@Override
 													public void mouseClicked(MouseEvent e) {
 
-														File file = new File("pics/alhambra.png"); 
+														GeneradorImagen gi = new GeneradorImagen(
+																estado, table);
+														gi.generarFichero();
+														try {
+															gi.compilarFichero();
+															gi.generarImagen();
+														} catch (IOException ioe) {
+															System.err.println("Error al compilar el grafo!");
+														} catch(InterruptedException ie) {
+															System.err.println(ie.getStackTrace());
+														}
+														
+														File file = new File("salida.png"); 
 
 														FileInputStream img = null;
 														BufferedImage image=null;
