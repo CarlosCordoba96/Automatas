@@ -34,16 +34,18 @@ public class GeneradorImagen {
 		String rstring = "";
 		while( estados.hasMoreElements()) {
 			estadoActual = estados.nextElement();
+			rstring += estadoActual.getEstado();
 			if(estadoActual.isInicial()) {
 				rstring += estadoActual.getEstado() + "[initial";
 				if(estadoActual.isEnd()) {
-					rstring += ", accepting];\n";
+					rstring += ", accepting]";
 				} else {
-					rstring += "];\n";
+					rstring += "]";
 				}
 			} else if(estadoActual.isEnd()) {
-				rstring += estadoActual.getEstado() + "[accepting];\n";
+				rstring += estadoActual.getEstado() + "[accepting]";
 			}
+			rstring += "\n;";
 		}
 		Enumeration<Transicion> transiciones = tablaTransiciones.elements();
 		Transicion transicionActual;
