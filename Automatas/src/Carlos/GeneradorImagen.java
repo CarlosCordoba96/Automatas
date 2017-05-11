@@ -36,16 +36,16 @@ public class GeneradorImagen {
 			estadoActual = estados.nextElement();
 			rstring += estadoActual.getEstado();
 			if(estadoActual.isInicial()) {
-				rstring += estadoActual.getEstado() + "[initial";
+				rstring += "[initial";
 				if(estadoActual.isEnd()) {
 					rstring += ", accepting]";
 				} else {
 					rstring += "]";
 				}
 			} else if(estadoActual.isEnd()) {
-				rstring += estadoActual.getEstado() + "[accepting]";
+				rstring += "[accepting]";
 			}
-			rstring += "\n;";
+			rstring += ";\n";
 		}
 		Enumeration<Transicion> transiciones = tablaTransiciones.elements();
 		Transicion transicionActual;
