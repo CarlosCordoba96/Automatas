@@ -358,20 +358,7 @@ public class Main extends JFrame {
 	}
 	
 	
-	public LinkedList<String> estadoss(){
-		LinkedList<String> est=new LinkedList();
-		Enumeration e = estado.keys();
-		while( e.hasMoreElements() ){
-			String clave = (String) e.nextElement();	
-			Estado aux=estado.get(clave);
-			
-				est.add(aux.getEstado());	
-
-		}
-		
-		Collections.sort(est);
-		return est;
-	}
+	
 	public void rellenartabla(){
 		modelo = new DefaultListModel();	
 		Enumeration e = table.keys();
