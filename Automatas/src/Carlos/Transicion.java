@@ -37,6 +37,10 @@ public class Transicion {
 	public Estado getHasta() {
 		return hasta;
 	}
+	
+	public String getTransicion() {
+		return transicion;
+	}
 
 
 }

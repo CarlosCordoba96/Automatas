@@ -51,9 +51,10 @@ public class GeneradorImagen {
 		Transicion transicionActual;
 		while( transiciones.hasMoreElements()) {
 			transicionActual = transiciones.nextElement();
-			rstring += transicionActual.getDesde().getEstado() + " -> " + 
+			rstring += transicionActual.getDesde().getEstado() + " ->" + 
+			"[edge label=" + transicionActual.getTransicion() +
 			(transicionActual.getDesde().getEstado().equals(
-					transicionActual.getHasta().getEstado()) ? "[loop above]" : "") +
+					transicionActual.getHasta().getEstado()) ? ",loop above] " : "] ") +
 			transicionActual.getHasta().getEstado() + ";\n";
 		}
 		return rstring;
