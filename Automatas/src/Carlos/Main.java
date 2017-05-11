@@ -11,6 +11,8 @@ import javax.swing.border.EmptyBorder;
 
 import java.awt.GridBagLayout;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JComboBox;
@@ -19,6 +21,7 @@ import javax.imageio.ImageIO;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.LinkedList;
@@ -322,27 +325,36 @@ public class Main extends JFrame {
 	
 	private class BtnNewButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			String desde=comboBox.getSelectedItem().toString();
-			Estado desd=new Estado(desde,false,false);
-			String hasta=comboBox_1.getSelectedItem().toString();
-			Estado hast=new Estado(hasta,false,false);
-			String transicion=comboBox_2.getSelectedItem().toString();
-			Transicion t=new Transicion(desd,hast,transicion);
-			table.put(desde+hasta+transicion, t);
-			rellenartabla();
+			if(comboBox.getItemCount()==0){
+				
+			}else{
+				String desde=comboBox.getSelectedItem().toString();
+				Estado desd=new Estado(desde,false,false);
+				String hasta=comboBox_1.getSelectedItem().toString();
+				Estado hast=new Estado(hasta,false,false);
+				String transicion=comboBox_2.getSelectedItem().toString();
+				Transicion t=new Transicion(desd,hast,transicion);
+				table.put(desde+hasta+transicion, t);
+				rellenartabla();
+			}
+			
 		}
 	}
 	public int ultimoestado(){	
-		int count=0;
-		Enumeration e = estado.keys();
-		while( e.hasMoreElements() ){
-			String clave = (String) e.nextElement();	
-			Estado aux=estado.get(clave);
-			
-				count++;	
-
+		int i=0;
+		boolean encontrado=false;
+		String name="q";
+		while(encontrado==false){
+			String pos=name+i;
+			if(estado.containsKey((pos))){
+				i++;
+			}else{
+				encontrado=true;
+			}
+		
 		}
-		return count;
+		
+		return i;
 	}
 	
 	
@@ -357,7 +369,7 @@ public class Main extends JFrame {
 
 		}
 		
-		
+		Collections.sort(est);
 		return est;
 	}
 	public void rellenartabla(){
