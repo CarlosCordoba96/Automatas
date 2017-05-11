@@ -97,9 +97,12 @@ public class GeneradorImagen {
 		printStream(compileProcess.getErrorStream());
 	}
 	
-	public void generarImagen() throws IOException {
+	public void generarImagen() throws IOException, InterruptedException {
 		Process convertProcess = new ProcessBuilder(
 				"convert", "salida.pdf", "salida.png").start();
+		convertProcess.waitFor();
+		printStream(convertProcess.getInputStream());
+		printStream(convertProcess.getErrorStream());
 	}
 	
 	public static void printStream(InputStream is) throws IOException{
