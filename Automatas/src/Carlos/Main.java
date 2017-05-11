@@ -75,9 +75,9 @@ public class Main extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{83, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWidths = new int[]{83, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 26, 0, 0, 0, 0, 15, 61, 25, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 
@@ -114,9 +114,9 @@ public class Main extends JFrame {
 
 		list = new JList();
 		GridBagConstraints gbc_list = new GridBagConstraints();
-		gbc_list.gridwidth = 3;
+		gbc_list.gridwidth = 2;
 		gbc_list.gridheight = 9;
-		gbc_list.insets = new Insets(0, 0, 5, 0);
+		gbc_list.insets = new Insets(0, 0, 5, 5);
 		gbc_list.fill = GridBagConstraints.BOTH;
 		gbc_list.gridx = 7;
 		gbc_list.gridy = 1;
@@ -217,6 +217,33 @@ public class Main extends JFrame {
 													}
 												});
 												
+												JButton btnEliminarTransicion = new JButton("Eliminar transicion");
+												btnEliminarTransicion.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent arg0) {
+														String selected =(String) list.getSelectedValue();
+														Enumeration e = table.keys();
+														while( e.hasMoreElements() ){
+															String clave = (String) e.nextElement();	
+															Transicion aux=table.get(clave);
+															if(aux.toString().equals(selected)){
+																table.remove(aux.hashName());
+															}														
+														}
+														rellenartabla();
+														
+														
+														
+														
+														
+														
+													}
+												});
+												GridBagConstraints gbc_btnEliminarTransicion = new GridBagConstraints();
+												gbc_btnEliminarTransicion.insets = new Insets(0, 0, 5, 5);
+												gbc_btnEliminarTransicion.gridx = 9;
+												gbc_btnEliminarTransicion.gridy = 8;
+												contentPane.add(btnEliminarTransicion, gbc_btnEliminarTransicion);
+												
 												JLabel lblListaDeEstados = new JLabel("Lista de estados:");
 												GridBagConstraints gbc_lblListaDeEstados = new GridBagConstraints();
 												gbc_lblListaDeEstados.insets = new Insets(0, 0, 5, 5);
@@ -236,6 +263,34 @@ public class Main extends JFrame {
 												
 												list_1 = new JList();
 												scrollPane.setViewportView(list_1);
+												
+												JButton btnEliminarEstado = new JButton("Eliminar estado");
+												btnEliminarEstado.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent e) {
+														String selected =(String) list_1.getSelectedValue();
+														Enumeration e1 = estado.keys();
+														while( e1.hasMoreElements() ){
+															String clave = (String) e1.nextElement();	
+															Estado aux=estado.get(clave);
+															if(aux.toString().equals(selected)){
+																estado.remove(aux.getEstado());
+																 eliminarcomunes(aux);
+															}														
+														}
+														rellenartablaEstados();
+														
+														
+														
+														
+														
+														
+													}
+												});
+												GridBagConstraints gbc_btnEliminarEstado = new GridBagConstraints();
+												gbc_btnEliminarEstado.insets = new Insets(0, 0, 5, 5);
+												gbc_btnEliminarEstado.gridx = 9;
+												gbc_btnEliminarEstado.gridy = 11;
+												contentPane.add(btnEliminarEstado, gbc_btnEliminarEstado);
 												GridBagConstraints gbc_btnEnsearImagen = new GridBagConstraints();
 												gbc_btnEnsearImagen.insets = new Insets(0, 0, 0, 5);
 												gbc_btnEnsearImagen.gridx = 8;
@@ -254,7 +309,6 @@ public class Main extends JFrame {
 				estado.put(name+ultimoestado(), nuevo);
 				
 				rellenartablaEstados();
-				rellenarVocabulario();
 			}
 		});
 
@@ -284,10 +338,27 @@ public class Main extends JFrame {
 		while( e.hasMoreElements() ){
 			String clave = (String) e.nextElement();	
 			Estado aux=estado.get(clave);
+			
 				count++;	
 
 		}
 		return count;
+	}
+	
+	
+	public LinkedList<String> estadoss(){
+		LinkedList<String> est=new LinkedList();
+		Enumeration e = estado.keys();
+		while( e.hasMoreElements() ){
+			String clave = (String) e.nextElement();	
+			Estado aux=estado.get(clave);
+			
+				est.add(aux.getEstado());	
+
+		}
+		
+		
+		return est;
 	}
 	public void rellenartabla(){
 		modelo = new DefaultListModel();	
@@ -296,9 +367,9 @@ public class Main extends JFrame {
 			String clave = (String) e.nextElement();	
 			Transicion aux=table.get(clave);
 			modelo.addElement(aux.toString());
-			list.setModel(modelo);			
-
+						
 		}
+		list.setModel(modelo);
 	}
 	public void rellenartabla2(){
 		modelo = new DefaultListModel();	
@@ -307,11 +378,22 @@ public class Main extends JFrame {
 			String clave = (String) e.nextElement();	
 			Estado aux=estado.get(clave);
 			modelo.addElement(aux.toString());
-			list_1.setModel(modelo);			
-
 		}
+		list_1.setModel(modelo);
 	}
 	
+	public void eliminarcomunes(Estado e){
+		Enumeration e1 = table.keys();
+		while( e1.hasMoreElements() ){
+			String clave = (String) e1.nextElement();	
+			Transicion aux=table.get(clave);
+			if(aux.getDesde().getEstado().equals(e.getEstado())||aux.getHasta().getEstado().equals(e.getEstado()) ){
+				table.remove(aux.hashName());
+			}
+						
+		}
+		rellenartabla();
+	}
 	public void rellenartablaEstados(){
 		comboBox.removeAllItems();
 		 comboBox_1.removeAllItems();
@@ -325,6 +407,7 @@ public class Main extends JFrame {
 		  }
 		  rellenartabla2();
 		 }
+	
 	public void rellenarVocabulario(){
 		for(int i=0;i<vocabulario.size();i++){
 			comboBox_2.addItem(vocabulario.get(i));

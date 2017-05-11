@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -20,7 +22,7 @@ public class Vocabulary extends JFrame {
 	private JPanel contentPane;
 	private JTextField textField;
 	private LinkedList<String> vocabulario = new LinkedList<String>();
-
+	private static Vocabulary frame;
 	/**
 	 * Launch the application.
 	 */
@@ -28,7 +30,7 @@ public class Vocabulary extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Vocabulary frame = new Vocabulary();
+					frame = new Vocabulary();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -90,8 +92,14 @@ public class Vocabulary extends JFrame {
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Main m=new Main(vocabulario);
-				m.setVisible(true);
+				if(vocabulario.isEmpty()){
+					JOptionPane.showMessageDialog(frame, "Introduce algo en el vocabulario.");
+				}else{
+					Main m=new Main(vocabulario);
+					m.setVisible(true);
+					frame.dispose();
+				}
+				
 			}
 		});
 		btnSiguiente.setFont(new Font("Tahoma", Font.PLAIN, 20));

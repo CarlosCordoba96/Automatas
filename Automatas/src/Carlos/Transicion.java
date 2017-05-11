@@ -10,11 +10,25 @@ public class Transicion {
 		this.transicion=transicion;
 		
 	}
+	public Estado getDesde() {
+		return desde;
+	}
+	public void setDesde(Estado desde) {
+		this.desde = desde;
+	}
+	public Estado getHasta() {
+		return hasta;
+	}
+	public void setHasta(Estado hasta) {
+		this.hasta = hasta;
+	}
 	@Override
 	public String toString() {
 
 		return "t "+desde.getEstado()+ "->" + hasta.getEstado() + "(" + transicion + ")";
 
 	}
-
+	public String hashName(){
+		return desde.getEstado()+hasta.getEstado()+transicion;
+	}
 }
