@@ -10,15 +10,11 @@ public class Transicion {
 		this.transicion=transicion;
 		
 	}
-	public Estado getDesde() {
-		return desde;
-	}
+
 	public void setDesde(Estado desde) {
 		this.desde = desde;
 	}
-	public Estado getHasta() {
-		return hasta;
-	}
+
 	public void setHasta(Estado hasta) {
 		this.hasta = hasta;
 	}
@@ -28,11 +24,11 @@ public class Transicion {
 		return "t "+desde.getEstado()+ "->" + hasta.getEstado() + "(" + transicion + ")";
 
 	}
-<<<<<<< HEAD
+
 	public String hashName(){
 		return desde.getEstado()+hasta.getEstado()+transicion;
 	}
-=======
+
 	
 	public Estado getDesde() {
 		return desde;
@@ -42,5 +38,5 @@ public class Transicion {
 		return hasta;
 	}
 
->>>>>>> latex
+
 }
