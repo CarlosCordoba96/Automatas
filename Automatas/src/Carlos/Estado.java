@@ -40,7 +40,7 @@ public class Estado {
 	public void setEnd(boolean end) {
 		this.end = end;
 	}
-
+    
 
 	public String toString() {
 		return "n "+estado+" "+inicial+" "+end;
