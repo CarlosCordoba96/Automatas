@@ -20,6 +20,7 @@ public class Imagen {
 	 */
 	public Imagen(BufferedImage img) {
 		initialize();
+		img.flush();
 		this.img=img;
 	}
 
