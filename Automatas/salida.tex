@@ -1,0 +1,16 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{graphs}
+\usetikzlibrary{graphdrawing, automata}
+\usegdlibrary{trees, layered, force}
+\begin{document}
+\pagestyle{empty}
+\begin{tikzpicture}
+  \tikz \graph [spring layout, sibling distance=7mm, nodes={state},
+  node distance=2cm, edge quotes mid]
+{
+q0;
+q0 ->[edge label=,loop above] q0;
+};
+\end{tikzpicture}
+\end{document}

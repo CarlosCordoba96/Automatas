@@ -90,13 +90,13 @@ public class Main extends JFrame {
 		gbc_lblEstadoDesde.gridx = 0;
 		gbc_lblEstadoDesde.gridy = 0;
 		contentPane.add(lblEstadoDesde, gbc_lblEstadoDesde);
-		
-				lblListaDeTransiciones = new JLabel("Lista de transiciones");
-				GridBagConstraints gbc_lblListaDeTransiciones = new GridBagConstraints();
-				gbc_lblListaDeTransiciones.insets = new Insets(0, 0, 5, 5);
-				gbc_lblListaDeTransiciones.gridx = 8;
-				gbc_lblListaDeTransiciones.gridy = 0;
-				contentPane.add(lblListaDeTransiciones, gbc_lblListaDeTransiciones);
+
+		lblListaDeTransiciones = new JLabel("Lista de transiciones");
+		GridBagConstraints gbc_lblListaDeTransiciones = new GridBagConstraints();
+		gbc_lblListaDeTransiciones.insets = new Insets(0, 0, 5, 5);
+		gbc_lblListaDeTransiciones.gridx = 8;
+		gbc_lblListaDeTransiciones.gridy = 0;
+		contentPane.add(lblListaDeTransiciones, gbc_lblListaDeTransiciones);
 
 		comboBox = new JComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
@@ -140,25 +140,25 @@ public class Main extends JFrame {
 		gbc_lblTransicion.gridx = 0;
 		gbc_lblTransicion.gridy = 4;
 		contentPane.add(lblTransicion, gbc_lblTransicion);
-				
-						comboBox_2 = new JComboBox();
-						GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
-						gbc_comboBox_2.gridwidth = 2;
-						gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
-						gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
-						gbc_comboBox_2.gridx = 0;
-						gbc_comboBox_2.gridy = 5;
-						contentPane.add(comboBox_2, gbc_comboBox_2);
-		
-				btnNewButton = new JButton("Insertar ");
-				btnNewButton.addActionListener(new BtnNewButtonActionListener());
-				GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-				gbc_btnNewButton.gridwidth = 2;
-				gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
-				gbc_btnNewButton.gridx = 4;
-				gbc_btnNewButton.gridy = 5;
-				contentPane.add(btnNewButton, gbc_btnNewButton);
-				rellenarVocabulario();
+
+		comboBox_2 = new JComboBox();
+		GridBagConstraints gbc_comboBox_2 = new GridBagConstraints();
+		gbc_comboBox_2.gridwidth = 2;
+		gbc_comboBox_2.insets = new Insets(0, 0, 5, 5);
+		gbc_comboBox_2.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBox_2.gridx = 0;
+		gbc_comboBox_2.gridy = 5;
+		contentPane.add(comboBox_2, gbc_comboBox_2);
+
+		btnNewButton = new JButton("Insertar ");
+		btnNewButton.addActionListener(new BtnNewButtonActionListener());
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.gridwidth = 2;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 4;
+		gbc_btnNewButton.gridy = 5;
+		contentPane.add(btnNewButton, gbc_btnNewButton);
+		rellenarVocabulario();
 		panel = new JPanel();
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panel.setLayout(null);
@@ -170,176 +170,172 @@ public class Main extends JFrame {
 		gbc_panel.gridx = 0;
 		gbc_panel.gridy = 7;
 		contentPane.add(panel, gbc_panel);
-		
+
 		btnAadirEstado = new JButton("Añadir estado");
 		btnAadirEstado.setBounds(85, 208, 157, 52);
 		panel.add(btnAadirEstado);
-		
+
 		JCheckBox chckbxEstadoInicial = new JCheckBox("Estado Inicial");
 		chckbxEstadoInicial.setBounds(37, 60, 139, 29);
 		panel.add(chckbxEstadoInicial);
-		
+
 		JCheckBox chckbxEstadoFinal = new JCheckBox("Estado Final");
 		chckbxEstadoFinal.setBounds(37, 97, 139, 29);
 		panel.add(chckbxEstadoFinal);
-		
+
 		JLabel lblAadirUnNuevo = new JLabel("Añadir un nuevo estado");
 		lblAadirUnNuevo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblAadirUnNuevo.setBounds(15, 16, 423, 32);
 		panel.add(lblAadirUnNuevo);
-										
-												btnEnsearImagen = new JButton("Mostrar imagen");
-												btnEnsearImagen.addActionListener(new ActionListener() {
-													public void actionPerformed(ActionEvent arg0) {
 
-													}
-												});
-												btnEnsearImagen.addMouseListener(new MouseAdapter() {
-													@Override
-													public void mouseClicked(MouseEvent e) {
+		btnEnsearImagen = new JButton("Mostrar imagen");
+		
+		btnEnsearImagen.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 
-														GeneradorImagen gi = new GeneradorImagen(
-																estado, table);
-														gi.generarFichero();
-														try {
-															gi.compilarFichero();
-															gi.generarImagen();
-														} catch (IOException ioe) {
-															System.err.println("Error al compilar el grafo!");
-														} catch(InterruptedException ie) {
-															System.err.println(ie.getStackTrace());
-														}
-														
-														File file = new File("salida.png"); 
+				GeneradorImagen gi = new GeneradorImagen(
+						estado, table);
+				gi.generarFichero();
+				try {
+					gi.compilarFichero();
+					gi.generarImagen();
+				} catch (IOException ioe) {
+					System.err.println("Error al compilar el grafo!");
+				} catch(InterruptedException ie) {
+					System.err.println(ie.getStackTrace());
+				}
 
-														FileInputStream img = null;
-														BufferedImage image=null;
-														try {
-															img = new FileInputStream(file);
-														} catch (FileNotFoundException e2) {
-															// TODO Auto-generated catch block
-															e2.printStackTrace();
-														}
+				File file = new File("salida.png"); 
 
-														try {
-															image = ImageIO.read(img);
-														} catch (IOException e1) {
-															// TODO Auto-generated catch block
-															e1.printStackTrace();
-														}
-														Imagen im=new Imagen(image);
-														im.printimg();
+				FileInputStream img = null;
+				BufferedImage image=null;
+				try {
+					img = new FileInputStream(file);
+				} catch (FileNotFoundException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
 
-													}
-												});
-												
-												JButton btnEliminarTransicion = new JButton("Eliminar transicion");
-												btnEliminarTransicion.addActionListener(new ActionListener() {
-													public void actionPerformed(ActionEvent arg0) {
-														String selected =(String) list.getSelectedValue();
-														Enumeration e = table.keys();
-														while( e.hasMoreElements() ){
-															String clave = (String) e.nextElement();	
-															Transicion aux=table.get(clave);
-															if(aux.toString().equals(selected)){
-																table.remove(aux.hashName());
-															}														
-														}
-														rellenartabla();
-														
-														
-														
-														
-														
-														
-													}
-												});
-												GridBagConstraints gbc_btnEliminarTransicion = new GridBagConstraints();
-												gbc_btnEliminarTransicion.insets = new Insets(0, 0, 5, 5);
-												gbc_btnEliminarTransicion.gridx = 9;
-												gbc_btnEliminarTransicion.gridy = 8;
-												contentPane.add(btnEliminarTransicion, gbc_btnEliminarTransicion);
-												
-												JLabel lblListaDeEstados = new JLabel("Lista de estados:");
-												GridBagConstraints gbc_lblListaDeEstados = new GridBagConstraints();
-												gbc_lblListaDeEstados.insets = new Insets(0, 0, 5, 5);
-												gbc_lblListaDeEstados.gridx = 8;
-												gbc_lblListaDeEstados.gridy = 10;
-												contentPane.add(lblListaDeEstados, gbc_lblListaDeEstados);
-												
-												scrollPane = new JScrollPane();
-												GridBagConstraints gbc_scrollPane = new GridBagConstraints();
-												gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
-												gbc_scrollPane.fill = GridBagConstraints.BOTH;
-												gbc_scrollPane.gridx = 8;
-												gbc_scrollPane.gridy = 11;
-												contentPane.add(scrollPane, gbc_scrollPane);
-												
-									
-												
-												list_1 = new JList();
-												scrollPane.setViewportView(list_1);
-												
-												JButton btnEliminarEstado = new JButton("Eliminar estado");
-												btnEliminarEstado.addActionListener(new ActionListener() {
-													public void actionPerformed(ActionEvent e) {
-														String selected =(String) list_1.getSelectedValue();
-														Enumeration e1 = estado.keys();
-														while( e1.hasMoreElements() ){
-															String clave = (String) e1.nextElement();	
-															Estado aux=estado.get(clave);
-															if(aux.toString().equals(selected)){
-																estado.remove(aux.getEstado());
-																 eliminarcomunes(aux);
-															}														
-														}
-														rellenartablaEstados();
-														
-														
-														
-														
-														
-														
-													}
-												});
-												GridBagConstraints gbc_btnEliminarEstado = new GridBagConstraints();
-												gbc_btnEliminarEstado.insets = new Insets(0, 0, 5, 5);
-												gbc_btnEliminarEstado.gridx = 9;
-												gbc_btnEliminarEstado.gridy = 11;
-												contentPane.add(btnEliminarEstado, gbc_btnEliminarEstado);
-												GridBagConstraints gbc_btnEnsearImagen = new GridBagConstraints();
-												gbc_btnEnsearImagen.insets = new Insets(0, 0, 0, 5);
-												gbc_btnEnsearImagen.gridx = 8;
-												gbc_btnEnsearImagen.gridy = 13;
-												contentPane.add(btnEnsearImagen, gbc_btnEnsearImagen);
-										
+				try {
+					image = ImageIO.read(img);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				Imagen im=new Imagen(image);
+				im.printimg();
+
+			}
+		});
+
+		JButton btnEliminarTransicion = new JButton("Eliminar transicion");
+		btnEliminarTransicion.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				String selected =(String) list.getSelectedValue();
+				Enumeration e = table.keys();
+				while( e.hasMoreElements() ){
+					String clave = (String) e.nextElement();	
+					Transicion aux=table.get(clave);
+					if(aux.toString().equals(selected)){
+						table.remove(aux.hashName());
+					}														
+				}
+				rellenartabla();
+
+
+
+
+
+
+			}
+		});
+		GridBagConstraints gbc_btnEliminarTransicion = new GridBagConstraints();
+		gbc_btnEliminarTransicion.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEliminarTransicion.gridx = 9;
+		gbc_btnEliminarTransicion.gridy = 8;
+		contentPane.add(btnEliminarTransicion, gbc_btnEliminarTransicion);
+
+		JLabel lblListaDeEstados = new JLabel("Lista de estados:");
+		GridBagConstraints gbc_lblListaDeEstados = new GridBagConstraints();
+		gbc_lblListaDeEstados.insets = new Insets(0, 0, 5, 5);
+		gbc_lblListaDeEstados.gridx = 8;
+		gbc_lblListaDeEstados.gridy = 10;
+		contentPane.add(lblListaDeEstados, gbc_lblListaDeEstados);
+
+		scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 8;
+		gbc_scrollPane.gridy = 11;
+		contentPane.add(scrollPane, gbc_scrollPane);
+
+
+
+		list_1 = new JList();
+		scrollPane.setViewportView(list_1);
+
+		JButton btnEliminarEstado = new JButton("Eliminar estado");
+		btnEliminarEstado.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String selected =(String) list_1.getSelectedValue();
+				Enumeration e1 = estado.keys();
+				while( e1.hasMoreElements() ){
+					String clave = (String) e1.nextElement();	
+					Estado aux=estado.get(clave);
+					if(aux.toString().equals(selected)){
+						estado.remove(aux.getEstado());
+						eliminarcomunes(aux);
+					}														
+				}
+				rellenartablaEstados();
+
+
+
+
+
+
+			}
+		});
+		GridBagConstraints gbc_btnEliminarEstado = new GridBagConstraints();
+		gbc_btnEliminarEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_btnEliminarEstado.gridx = 9;
+		gbc_btnEliminarEstado.gridy = 11;
+		contentPane.add(btnEliminarEstado, gbc_btnEliminarEstado);
+		GridBagConstraints gbc_btnEnsearImagen = new GridBagConstraints();
+		gbc_btnEnsearImagen.insets = new Insets(0, 0, 0, 5);
+		gbc_btnEnsearImagen.gridx = 8;
+		gbc_btnEnsearImagen.gridy = 13;
+		contentPane.add(btnEnsearImagen, gbc_btnEnsearImagen);
+
 		btnAadirEstado.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean inicial, fin;
 				String name = "q";
-				
+
 				inicial = chckbxEstadoInicial.isSelected();
 				fin = chckbxEstadoFinal.isSelected();
-				
+
 				Estado nuevo=new Estado(name+ultimoestado(),inicial,fin);
 				estado.put(name+ultimoestado(), nuevo);
-				
+
 				rellenartablaEstados();
 			}
 		});
 
 	}
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 	private class BtnNewButtonActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if(comboBox.getItemCount()==0){
-				
+
 			}else{
 				String desde=comboBox.getSelectedItem().toString();
 				Estado desd=new Estado(desde,false,false);
@@ -350,7 +346,7 @@ public class Main extends JFrame {
 				table.put(desde+hasta+transicion, t);
 				rellenartabla();
 			}
-			
+
 		}
 	}
 	public int ultimoestado(){	
@@ -364,14 +360,14 @@ public class Main extends JFrame {
 			}else{
 				encontrado=true;
 			}
-		
+
 		}
-		
+
 		return i;
 	}
-	
-	
-	
+
+
+
 	public void rellenartabla(){
 		modelo = new DefaultListModel();	
 		Enumeration e = table.keys();
@@ -379,7 +375,7 @@ public class Main extends JFrame {
 			String clave = (String) e.nextElement();	
 			Transicion aux=table.get(clave);
 			modelo.addElement(aux.toString());
-						
+
 		}
 		list.setModel(modelo);
 	}
@@ -393,7 +389,7 @@ public class Main extends JFrame {
 		}
 		list_1.setModel(modelo);
 	}
-	
+
 	public void eliminarcomunes(Estado e){
 		Enumeration e1 = table.keys();
 		while( e1.hasMoreElements() ){
@@ -402,24 +398,24 @@ public class Main extends JFrame {
 			if(aux.getDesde().getEstado().equals(e.getEstado())||aux.getHasta().getEstado().equals(e.getEstado()) ){
 				table.remove(aux.hashName());
 			}
-						
+
 		}
 		rellenartabla();
 	}
 	public void rellenartablaEstados(){
 		comboBox.removeAllItems();
-		 comboBox_1.removeAllItems();
-		  Enumeration e = estado.keys();
-		  while( e.hasMoreElements() ){
-		   String clave = (String) e.nextElement(); 
-		   Estado aux=estado.get(clave);
-		   comboBox.addItem(aux.getEstado());
-		   comboBox_1.addItem(aux.getEstado());
-		  
-		  }
-		  rellenartabla2();
-		 }
-	
+		comboBox_1.removeAllItems();
+		Enumeration e = estado.keys();
+		while( e.hasMoreElements() ){
+			String clave = (String) e.nextElement(); 
+			Estado aux=estado.get(clave);
+			comboBox.addItem(aux.getEstado());
+			comboBox_1.addItem(aux.getEstado());
+
+		}
+		rellenartabla2();
+	}
+
 	public void rellenarVocabulario(){
 		for(int i=0;i<vocabulario.size();i++){
 			comboBox_2.addItem(vocabulario.get(i));
